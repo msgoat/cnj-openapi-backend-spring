@@ -29,10 +29,26 @@ public class OpenApiEndpointSystemTest {
     }
 
     @Test
-    public void getOpenApiReturns200AndOpenApiYaml() {
+    void getOpenApiWithDefaultUriReturns200AndOpenApiJson() {
         given().get("/v3/api-docs")
                 .then()
                 .statusCode(200)
-                .contentType(ContentType.TEXT);
+                .contentType(ContentType.JSON);
+    }
+
+    @Test
+    void getOpenApiWithYamlUriReturns200AndOpenApiYaml() {
+        given().get("/v3/api-docs.yaml")
+                .then()
+                .statusCode(200)
+                .contentType("application/vnd.oai.openapi");
+    }
+
+    @Test
+    void getSwaggerUiReturns200AndHtml() {
+        given().get("/swagger-ui/index.html")
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.HTML);
     }
 }

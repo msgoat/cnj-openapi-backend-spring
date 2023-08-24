@@ -6,10 +6,10 @@
     <artifactId>cnj-openapi-backend-spring</artifactId>
     <version>${revision}${changelist}${sha1}</version>
     <packaging>jar</packaging>
-    <description>Cloud native Java backend based on Spring Boot using Spring Doc to doucment REST APIs</description>
+    <description>Cloud native Java backend based on Spring Boot using Spring Doc to document REST APIs</description>
     <properties>
         <!-- new Maven version management -->
-        <revision>5.0.0</revision>
+        <revision>5.1.0</revision>
         <sha1>.12345678</sha1>
         <changelist>.LOCAL</changelist>
         <!-- general properties -->
@@ -23,9 +23,9 @@
         <slf4j.version>2.0.6</slf4j.version>
         <logstash.logback.encoder.version>6.1</logstash.logback.encoder.version>
         <!-- common security dependencies -->
-        <cnj.common.security.version>2.0.0</cnj.common.security.version>
+        <cnj.common.security.version>2.2.0</cnj.common.security.version>
         <!-- common rest dependencies -->
-        <cnj.common.observability.version>1.0.0</cnj.common.observability.version>
+        <cnj.common.observability.version>1.1.0</cnj.common.observability.version>
         <!-- common test dependencies -->
         <junit.version>5.9.2</junit.version>
         <restassured.version>5.2.1</restassured.version>
@@ -62,7 +62,7 @@
         <!-- pinning versions of application type specific maven plugins -->
         <maven.spring.boot.plugin.version>${spring.boot.version}</maven.spring.boot.plugin.version>
         <!-- pinning versions of cloud native specific maven plugins -->
-        <maven.compose.plugin.version>4.0.0</maven.compose.plugin.version>
+        <maven.compose.plugin.version>5.0.0</maven.compose.plugin.version>
         <maven.docker.plugin.version>0.37.0</maven.docker.plugin.version>
         <maven.helm.plugin.version>4.0.0</maven.helm.plugin.version>
         <!-- quality assurance properties -->
@@ -132,24 +132,16 @@
             <artifactId>cnj-common-observability-spring</artifactId>
             <version>${cnj.common.observability.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
         <!-- showcase specific section -->
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>1.7.0</version>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.2.0</version>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-webmvc-core</artifactId>
-            <version>1.7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-security</artifactId>
-            <version>1.7.0</version>
-        </dependency>
-        -->
         <!-- =========================== -->
         <!-- test time dependencies      -->
         <!-- =========================== -->
@@ -192,7 +184,6 @@
                         <showWarnings>true</showWarnings>
                         <compilerArgs>
                             <arg>-Xlint</arg>
-                            <!-- <arg>-Xdoclint</arg> -->
                         </compilerArgs>
                     </configuration>
                 </plugin>
@@ -909,20 +900,6 @@
                                     <timeout>90s</timeout>
                                 </configuration>
                             </execution>
-                            <!--
-                                                        <execution>
-                                                            <id>helm-delete</id>
-                                                            <phase>post-integration-test</phase>
-                                                            <goals>
-                                                                <goal>uninstall</goal>
-                                                            </goals>
-                                                            <configuration>
-                                                                <releaseName>${project.artifactId}</releaseName>
-                                                                <namespace>${k8s.cluster.namespace}</namespace>
-                                                                <debug>true</debug>
-                                                            </configuration>
-                                                        </execution>
-                            -->
                         </executions>
                     </plugin>
                     <!-- run system tests on installed helm release -->
@@ -969,4 +946,30 @@
             <url>https://nexus.cloudtrain.aws.msgoat.eu/repository/cloudtrain-releases/</url>
         </repository>
     </distributionManagement>
+    <pluginRepositories>
+        <pluginRepository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <id>cloudtrain-maven-repository</id>
+            <name>msg Automotive CloudTrain Releases Repository</name>
+            <url>https://nexus.cloudtrain.aws.msgoat.eu/repository/cloudtrain-releases/</url>
+            <layout>default</layout>
+        </pluginRepository>
+    </pluginRepositories>
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+                <updatePolicy>daily</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </releases>
+            <id>cloudtrain-maven-repository</id>
+            <name>msg Automotive CloudTrain Releases Repository</name>
+            <url>https://nexus.cloudtrain.aws.msgoat.eu/repository/cloudtrain-releases/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
 </project>

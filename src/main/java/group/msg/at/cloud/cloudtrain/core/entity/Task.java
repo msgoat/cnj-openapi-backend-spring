@@ -1,8 +1,11 @@
 package group.msg.at.cloud.cloudtrain.core.entity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
-import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -19,7 +22,7 @@ public class Task {
     /**
      * Unique identifier of this task.
      */
-    @Schema(description = "unique identifier of this task", readOnly = true)
+    @Schema(description = "unique identifier of this task")
     private UUID id;
 
     /**
@@ -166,30 +169,30 @@ public class Task {
      * User-ID of the user who created this task
      */
     @Size(max = 31)
-    @Schema(description = "user-ID of the user who created this task", readOnly = true)
+    @Schema(description = "user-ID of the user who created this task")
     private String createdBy;
 
     /**
      * Date/time when this task has been created.
      */
-    @Schema(description = "date/time when this task has been created", readOnly = true)
+    @Schema(description = "date/time when this task has been created")
     private LocalDateTime createdAt;
 
     /**
      * User-ID of the last user who modified this task
      */
     @Size(max = 31)
-    @Schema(description = "user-ID of the last user who modified this task", readOnly = true)
+    @Schema(description = "user-ID of the last user who modified this task")
     private String lastModifiedBy;
 
     /**
      * Date/time when this task has been modified.
      */
-    @Schema(description = "date/time when this task has been modified", readOnly = true)
+    @Schema(description = "date/time when this task has been modified")
     private LocalDateTime lastModifiedAt;
 
     public Task() {
-
+        super();
     }
 
     public UUID getId() {
