@@ -14,6 +14,8 @@ A changelog can be found in [changelog.md](changelog.md).
 
 `docker pull docker.cloudtrain.aws.msgoat.eu/cloudtrain/cnj-openapi-backend-spring`
 
+## Synopsis
+
 ### Static vs. generated OpenAPI files
 
 In this showcase, [Springdoc](https://springdoc.org/#Introduction) is used to demonstrate the `Code First` approach
